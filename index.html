@@ -207,7 +207,7 @@
             box-sizing: border-box;
         }
 
-        /* 貴婦狗過關成績單卡片 */
+        /* 恭喜過關成績單卡片樣式 */
         .certificate-card {
             display: none;
             background: #FFFBE9;
@@ -221,28 +221,17 @@
             animation: popIn 0.3s ease-out;
         }
 
-        .poodle-avatar {
-            width: 76px;
-            height: 76px;
-            margin: 0 auto 8px auto;
-            display: block;
-            background: #F4E2DE;
-            border-radius: 50%;
-            padding: 6px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
-
         .certificate-card h2 {
             color: #BC6C25;
-            margin: 0 0 8px 0;
-            font-size: 1.35rem;
+            margin: 0 0 10px 0;
+            font-size: 1.4rem;
         }
 
         .certificate-info {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: #333;
-            margin: 5px 0;
-            line-height: 1.4;
+            margin: 6px 0;
+            line-height: 1.5;
         }
 
         @keyframes popIn {
@@ -287,41 +276,14 @@
 
     <div id="messageBox" class="message-box"></div>
 
-    <!-- 貴婦狗過關成績單 -->
+    <!-- 完成過關成績單（含截圖摘要與時間） -->
     <div id="certificateCard" class="certificate-card">
-        <!-- 可愛貴婦小狗 SVG 插圖 -->
-        <svg class="poodle-avatar" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="55" r="28" fill="#DDA15E"/>
-            <!-- 耳朵 -->
-            <ellipse cx="28" cy="52" rx="10" ry="18" fill="#BC6C25" transform="rotate(-15 28 52)"/>
-            <ellipse cx="72" cy="52" rx="10" ry="18" fill="#BC6C25" transform="rotate(15 72 52)"/>
-            <!-- 頭頂毛毛球 -->
-            <circle cx="50" cy="32" r="14" fill="#E9EDC9"/>
-            <circle cx="42" cy="26" r="10" fill="#E9EDC9"/>
-            <circle cx="58" cy="26" r="10" fill="#E9EDC9"/>
-            <!-- 臉部輪廓 -->
-            <circle cx="50" cy="60" r="18" fill="#FEFAE0"/>
-            <!-- 眼睛 -->
-            <circle cx="43" cy="55" r="3" fill="#333"/>
-            <circle cx="57" cy="55" r="3" fill="#333"/>
-            <circle cx="42" cy="54" r="1" fill="#FFF"/>
-            <circle cx="56" cy="54" r="1" fill="#FFF"/>
-            <!-- 鼻子與嘴巴 -->
-            <ellipse cx="50" cy="65" rx="4" ry="3" fill="#333"/>
-            <path d="M 46 72 Q 50 76 54 72" stroke="#333" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <!-- 腮紅 -->
-            <circle cx="36" cy="64" r="5" fill="#F4ACB7" opacity="0.6"/>
-            <circle cx="64" cy="64" r="5" fill="#F4ACB7" opacity="0.6"/>
-            <!-- 皇冠/給讚小星星 -->
-            <path d="M 75 25 L 78 33 L 86 34 L 80 40 L 82 48 L 75 44 L 68 48 L 70 40 L 64 34 L 72 33 Z" fill="#F4A261" transform="scale(0.5) translate(65, 10)"/>
-        </svg>
-
-        <h2>🎉 貴婦狗狗給您按讚！</h2>
+        <h2>🎉 媽媽好棒！今日挑戰成功</h2>
         <div class="certificate-info" id="certDateText"></div>
         <div class="certificate-info" id="certModeText"></div>
-        <div class="certificate-info" id="certTimeText" style="font-size: 1.15rem; font-weight: bold; color: #2D6A4F;"></div>
-        <p style="font-size: 0.9rem; color: #666; margin-top: 8px;">媽媽今天腦筋轉得真棒，狗狗陪您天天動動腦！❤️</p>
-        <button onclick="newPractice()" style="margin-top: 6px; width: 100%;">再玩一局新題目</button>
+        <div class="certificate-info" id="certTimeText" style="font-size: 1.2rem; font-weight: bold; color: #2D6A4F;"></div>
+        <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">媽媽今天腦筋轉得真快，記得明天再來挑戰新題目喔！❤️</p>
+        <button onclick="newPractice()" style="margin-top: 8px; width: 100%;">再玩一局新題目</button>
     </div>
 </div>
 
@@ -334,6 +296,7 @@
     let selectedCell = null;
     let solvedTotal = 0;
     
+    // 計時器變數
     let secondsElapsed = 0;
     let timerInterval = null;
     let isGameCompleted = false;
@@ -537,6 +500,7 @@
             solvedTotal++;
             document.getElementById('solvedCount').innerText = solvedTotal;
 
+            // 隱藏一般訊息與鍵盤，顯示精美成績單截圖卡片
             document.getElementById('messageBox').style.display = 'none';
             
             const mins = Math.floor(secondsElapsed / 60);
